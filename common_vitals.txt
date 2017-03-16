@@ -1,0 +1,10 @@
+trauma:
+heart attack:Pulse&0|BPSys&0|BPDia&0
+stroke:PupilsR&0|PupilsL&0
+anaphylaxis:Breathing&0
+asthma:Breathing&0|SpO2&0
+nausea:
+overdose:
+cardiac arrest:Pulse&0|Breathing&0|SpO2&0
+labor:
+syncope:Pulse&0|SpO2&0|PupilsL&0|PupilsR&0

@@ -1,0 +1,16 @@
+FirstName: Nisu
+LastName: Patel
+Sex: Male
+Age: 21
+Weight: 110
+HeightFt: 6
+HeightIn: 00
+Symptom: asthma attack
+Note: History of asthma, inhalor perscribed.
+Note: throat tight
+Note: Warfarin
+Note: Albuterol administered 2 times 15:05 15:10
+Note: breathing issues
+Breathing: 24
+Pulse: 70
+SpO2: 94

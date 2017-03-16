@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>E-mergency</title>
+
+    <!-- Bootstrap -->
+    <script src="../js/emergency.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap.vertical-tabs.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/custom_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  
+    <!--JQUERY-->
+    <script>
+      $(document).ready(function() {
+        $(':input').closest('form').find("input[type=text], textarea").val("");
+        var data = null;
+        $.ajax({
+          type: 'GET',
+          url:'/get_data',
+            contentType: 'application/json;charset=UTF-8',
+            success:function(data) {
+            console.log(data)
+            $('#FirstName').val(data.FirstName);
+            $('#LastName').val(data.LastName);
+            $('#Age').val(data.Age);
+            $("option[value='" + data.Sex + "']",data.Sex).attr("selected","selected");
+            $('#Weight').val(data.Weight);
+            $('#HeightFt').val(data.HeightFt);
+            $('#HeightIn').val(data.HeightIn);
+            $('#Symptom').val(data.Symptom);
+            $('#Note').val(data.Note);
+          }
+        });
+        delete data;
+      })
+    </script>
+  </head>
+  <body>
+
+
+
+    <header> <!-- required for floating -->
+      <ul class="nav nav-pills nav-stacked">
+      <li class="active"><a href="#basic" data-toggle="tab">Basic</a></li>
+      <li><a href="#vital" data-toggle="tab">Vitals</a></li>
+      <li><a href="#primary" data-toggle="tab">Primary</a></li>
+      <li><a href="#treatments" data-toggle="tab">Treatments</a></li>
+      <li><a href="#misc" data-toggle="tab">Misc</a></li>
+      </ul>
+    </header>
+
+  <div class="container main-body">
+    <div class="page-header">
+     <button type="submit" class="btn btn-default">Upload</button>
+      <h1>Basic</h1>
+      <p class="lead">Basic Patient Identifiers</p>
+    </div>
+
+    <div class="col-xs-10 vital-container">
+        <div class="vital-title">1. Name
+        </div>
+        <div class="name-text">First
+        </div>
+        <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" id="FirstName" style="width:125px;height: 50px;">
+            </div>
+          </form>
+        </div>
+        <div class="name-text" style="margin-left: 10px">Last
+        </div>
+        <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" id="LastName" style="width:125px;height: 50px;">
+            </div>
+          </form>
+        </div>
+      </div>
+
+    <div class="col-xs-10 vital-container">
+        <div class="vital-title">2. Age/Sex
+        </div>
+      <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" id="Age" style="width:125px;height: 50px;margin-right: 25px" >
+            </div>
+          </form>
+        </div>
+        <select class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 105px; text-align: center; margin-left:0px" id="Sex">
+          <option value="Female">Female</option>
+          <option value="Male" selected="selected">Male</option>
+          <option value="Other">Other</option>
+      </select>
+    </div>
+
+    
+  <div class="col-xs-10 vital-container">
+      <div class="vital-title">3. Weight</div>
+      <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" id="Weight" style="width:100px;height: 50px;" id="Weight">
+            </div>
+          </form>
+        </div>
+        <div class="name-text">lbs</div>
+    </div>
+    <div class="col-xs-10 vital-container">
+      <div class="vital-title">4. Height</div>
+      <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" style="width:100px;height: 50px;" id="HeightFt">
+            </div>
+          </form>
+        </div>
+        <div class="name-text">ft</div>
+        <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" style="width:100px;height: 50px;" id="HeightIn">
+            </div>
+          </form>
+        </div>
+        <div class="name-text">in</div>
+    </div>
+
+      <div class="col-xs-10 vital-container">
+        <div class="vital-title">5. Chief Complaint
+        </div>
+      <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" style="width:300px;height:50px;margin-right: 25px" id="Symptom">
+            </div>
+          </form>
+        </div>
+    </div>
+
+    <div class="col-xs-10 vital-container">
+        <div class="vital-title">6. Important Notes
+        </div>
+      <div class="systolic-field">
+          <form class="form-inline" role="form">
+            <div class="form-group">
+              <textarea type="text" class="form-control" style="width:300px;height:100px;margin-right: 25px" id="Note"></textarea>
+            </div>
+          </form>
+        </div>
+    </div>
+
+
+<!--    <div class="row1"> 
+      <div class="col-xs-2">
+         <div class="resp-title pull-left" style="font-size: 36px;"><strong>Respiratory</strong></div>
+         RPM
+         </div>
+      </div>
+      <div class="col-xs-8">
+        <form role="form">
+          <div class="form-group pull-left">
+              <input type="text" class="form-control" id="usr">
+          </div>
+        </form>
+      </div>
+     </div>-->
+ </div> <!--- /.container -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+    var defaults = {}
+      , one_second = 1000
+      , one_minute = one_second * 60
+      , one_hour = one_minute * 60
+      , one_day = one_hour * 24
+      , startDate = new Date()
+      , face = document.getElementById('lazy');
+
+    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+    var requestAnimationFrame = (function() {
+      return window.requestAnimationFrame       || 
+             window.webkitRequestAnimationFrame || 
+             window.mozRequestAnimationFrame    || 
+             window.oRequestAnimationFrame      || 
+             window.msRequestAnimationFrame     || 
+             function( callback ){
+               window.setTimeout(callback, 1000 / 60);
+             };
+    }());
+
+    tick();
+
+    function tick() {
+
+      var now = new Date()
+        , elapsed = now - startDate
+        , parts = [];
+
+      parts[0] = '' + Math.floor( elapsed / one_hour );
+      parts[1] = '' + Math.floor( (elapsed % one_hour) / one_minute );
+      parts[2] = '' + Math.floor( ( (elapsed % one_hour) % one_minute ) / one_second );
+
+      parts[0] = (parts[0].length == 1) ? '0' + parts[0] : parts[0];
+      parts[1] = (parts[1].length == 1) ? '0' + parts[1] : parts[1];
+      parts[2] = (parts[2].length == 1) ? '0' + parts[2] : parts[2];
+
+      face.innerText = parts.join(':');
+      
+      requestAnimationFrame(tick);
+      
+    }
+  </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+  </body>
+</html>

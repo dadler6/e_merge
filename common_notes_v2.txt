@@ -1,0 +1,10 @@
+trauma:pain level&0|location&0|dull&0|ache&0|head neck&0|back injury&0|radiation&0|minutes&0|hours&0|seconds&0
+heart attack:dull chest pain&1|past history of heart attacks&1|cardiac drugs&2|beta blockers&2|nitroglycerin&2|dosage&2|pain&1|left shoulder&1|family history&1
+stroke:verbal&0|face droop&0|droop&0|slurred words&0|dizzy&0
+anaphylaxis:epi-pen&0|epinephrine given&0|upper throat closing up&0|throat closing&0|history of allergies&0|food&0|breathing&1
+asthma:albuterol&2|inhaler&2|lower throat closing up&0|strenuous exercise&0|breathing&1|throat closing&0
+nausea:last ate&1|events&0|vomit&0
+overdose:drugs&0|prescription&0
+cardiac arrest: unresponsive&1
+labor:due date&0|contractions&0|frequent&0|complications from birth&0
+syncope:event&0|verbal&1|diabetes&1|last ate&1|unresponsive&1

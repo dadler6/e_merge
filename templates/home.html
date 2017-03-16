@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>E-mergency</title>
+
+    <!-- Bootstrap -->
+    <script src="../js/emergency.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap.vertical-tabs.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/custom_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+ <body>
+
+
+<style type="text/css">
+/* Custom Styles */
+body{
+	position: relative; /* required */
+}
+
+ul.nav-tabs {
+
+	width: 260px;
+	height: 100000px;
+	margin-top: 20px;
+	border-radius: 4px;
+    background: #1c516a;
+    z-index: 999;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+
+}
+ul.nav-tabs li {
+	margin: 0;
+	border-top: 1px solid #ddd;
+}
+ul.nav-tabs li:first-child {
+	border-top: none;
+}
+ul.nav-tabs li a {
+	margin: 0;
+	padding: 8px 16px;
+	border-radius: 0;
+}
+ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+	color: #fff;
+	background: #0088cc;
+	border: 1px solid #0088cc;
+}
+ul.nav-tabs li:first-child a {
+	border-radius: 4px 4px 0 0;
+}
+ul.nav-tabs li:last-child a {
+	border-radius: 0 0 4px 4px;
+}
+ul.nav-tabs.affix {
+	top: 0px; /* set the top position of pinned element */
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    ul.nav-tabs{
+        width: 180px; /* set nav width on medium devices */
+    }
+}
+@media screen and (min-width: 1200px){
+    ul.nav-tabs{
+        width: 220px; /* set nav width on large devices */
+    }
+}
+</style>
+
+<script>
+	$(document).ready(function() {
+		$('#submit').click(function() {
+			var patient_data = {};
+			$("input").each(function(){
+				patient_data[$(this).attr("id")] = $(this).val();
+			});
+			$("select").each(function(){
+				patient_data[$(this).attr("id")] = $(this).val();
+			});
+			$.ajax({
+				type: 'POST',
+				url:'/get_patient_information',
+				data: JSON.stringify(patient_data, null, '\t'),
+    			contentType: 'application/json;charset=UTF-8',
+    			success:function(data) {
+    				if (data === 'True') {
+    					alert('Patient data successfully E-Merg-ed!!')
+    				} else {
+    					alert('ERROR: patient data not saved successfully.')
+    				}
+    			}
+			});
+		});
+	})
+</script>
+
+</head>
+
+
+<body data-spy="scroll" data-target="#myScrollspy" >
+
+
+<div id="data" class="container">
+
+    
+
+    <div class="row">
+        <div class="col-sm-3" id="myScrollspy">
+            <ul class="nav nav-tabs nav-pills nav-stacked" data-offset-top="120" data-spy="affix">
+
+            	<font color="white">
+            	<font size ="200px">
+            	<FONT FACE="impact">E-Merge</font></font></font>
+                <li class="active"><a href="#section1">Basic</a></li>
+                <li><a href="#section2">Vitals</a></li>
+                <li><a href="#section3">Primary</a></li>
+                <li><a href="#section4">Treatments</a></li>
+                <li><a href="#section5">Misc</a></li>
+            </ul>
+        </div>
+                <div class="col-xs-9">
+<img src="../static/ambulance-5-xxl.png">
+</img>
+
+			<div id="section1" class="something">
+				<div class="page-header">
+      				<h1>Basic</h1>
+     				<p class="lead">Insert Basic Patient Information</p>
+    			</div>
+
+      			<div class="col-xs-10 vital-container">
+					<div class="vital-title">1. Name
+        			</div>
+        			<div class="name-text">First
+        			</div>
+        			<div class="systolic-field">
+          				<form class="form-inline" role="form">
+            				<div class="form-group">
+              					<input type="text" class="form-control" id="FirstName" style="width:125px;height: 50px;" value="Nisu">
+            				</div>
+         				</form>
+        			</div>
+        			<div class="name-text" style="margin-left: 10px">Last
+        			</div>
+        			<div class="systolic-field">
+          				<form class="form-inline" role="form">
+            				<div class="form-group">
+              					<input type="text" class="form-control" id="LastName" style="width:125px;height: 50px;" value="Patel">
+            				</div>
+          				</form>
+        			</div>
+      			</div>
+
+    			<div class="col-xs-10 vital-container">
+        			<div class="vital-title">2. Age/Sex
+        			</div>
+	      			<div class="systolic-field">
+	          			<form class="form-inline" role="form">
+	            			<div class="form-group">
+	              				<input type="text" class="form-control" id="Age" style="width:125px;height: 50px;margin-right: 25px" value="21">
+	            			</div>
+	          			</form>
+	        		</div>
+        			<select class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" id="Sex" aria-expanded="true" role="button" style="height: 50px; width: 105px; text-align: center; margin-left:0px" value="Male">
+          				<option value="None"> </option>
+				        <option selected="selected" value="Male">Male</option>
+				        <option value="Female">Female</option>
+				        <option value="Other">Other</option>
+      				</select>
+    			</div>
+
+			    <div class="col-xs-10 vital-container">
+			        <div class="vital-title">3. Address
+			        </div>
+			        <div class="systolic-field">
+			          <form class="form-inline" role="form">
+			            <div class="form-group">
+			              <input type="text" class="form-control" id="Address" style="width:350px;height: 50px;" value="3501 St. Paul St">
+			            </div>
+			          </form>
+			        </div>
+			    </div>
+			    <div class="col-xs-10 vital-container">
+			        <div class="vital-title">4. City
+			        </div>
+			      	<div class="systolic-field">
+			          <form class="form-inline" role="form">
+			            <div class="form-group">
+			              <input type="text" class="form-control" id="City" style="width:200px;height: 50px;" value="Baltimore">
+			            </div>
+			          </form>
+			        </div>
+			    </div>
+			    <div class="col-xs-10 vital-container">
+			        <div class="vital-title">5. State
+			        </div>
+			        <div class="systolic-field">
+			          <form class="form-inline" role="form">
+			            <div class="form-group">
+			              <input type="text" class="form-control" id="State" style="width:50px;height: 50px;" value="MD">
+			            </div>
+			          </form>
+			        </div>
+			        <div class="vital-title" style="margin-left: 20px;width: 125px"> Zip Code
+			        </div>
+			        <div class="systolic-field">
+			          <form class="form-inline" role="form">
+			            <div class="form-group">
+			              <input type="text" class="form-control" id="Zip" style="width:75px;height: 50px;" value="21218">
+			            </div>
+			          </form>
+			        </div>
+			    </div>
+				<div class="col-xs-10 vital-container">
+				    <div class="vital-title">6. Weight</div>
+				    <div class="systolic-field">
+				        <form class="form-inline" role="form">
+				          <div class="form-group">
+				            <input type="text" class="form-control" id="Weight" style="width:100px;height: 50px;" value="110">
+				          </div>
+				        </form>
+				    </div>
+				<div class="name-text">lbs</div>
+				</div>
+			    <div class="col-xs-10 vital-container">
+			      <div class="vital-title">7. Height
+			      </div>
+			      <div class="systolic-field">
+			          <form class="form-inline" role="form">
+			            <div class="form-group">
+			              <input type="text" class="form-control" id="HeightFt" style="width:100px;height: 50px;" value="6">
+			            </div>
+			          </form>
+			       </div>
+		        <div class="name-text">ft
+		        </div>
+		        <div class="systolic-field">
+		          <form class="form-inline" role="form">
+		            <div class="form-group">
+		              <input type="text" class="form-control" id="HeightIn" style="width:100px;height: 50px;" value="00">
+		            </div>
+		          </form>
+		        </div>
+		        <div class="name-text">in
+		        </div>
+		    	</div>
+			</div>
+
+			<hr>
+			<div id="section2" class="something">
+				<div class="col-xs-10 sec 2">
+					<div class="page-header">
+			   			<h1>Vitals</h1>
+			   			<p class="lead">Insert Vitals Data</p>
+			 		</div>
+			 	</div>
+             
+
+	   <div class="col-xs-10 vital-container">
+	    	<div class="vital-title">1. Alertness
+	    	</div>
+			<select class="btn btn-default dropdown-toggle" id="Alertness" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 200px;margin-right: 20px">
+			  <option selected="selected" value="a">Alert</option>
+			  <option value="Verbal">Verbal</option>
+			  <option value="Painful">Painful</option>
+			  <option value="Unresponsive">Unresponsive</option>
+			</select>
+			<strong>A&Ox:</strong>
+			<select class="btn btn-default dropdown-toggle" id="AxO" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 60px;">
+			  <option value="3">3</option>
+			  <option value="2">2</option>
+			  <option value="1">1</option>
+			</select>
+		</div>
+
+		<div class="col-xs-10 vital-container">
+	    	<div class="vital-title">2. Breathing
+	    	</div>
+			<select class="btn btn-default dropdown-toggle" id="Resp-q" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 105px;">
+			  <option value="Normal">Normal</option>
+			  <option value="Rapid">Rapid</option>
+			  <option value="Heaving">Heaving</option>
+			  <option value="Labored">Labored</option>
+			  <option value="Shallow">Shallow</option>
+			</select>
+			<div class="systolic-field">
+				<form class="form-inline" role="form">
+		          <div class="form-group">
+		            <input type="text" class="form-control" id="Breathing" style="margin-left: 5px; width: 50px;height: 50px" value="24">
+		          </div>
+		          <label for="First name" style="margin-bottom: 0px">BPM</label>
+	       	 	</form>
+			</div>
+			<select class="btn btn-default dropdown-toggle" id="Resp-t" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 105px; text-align: center; margin-left:20px">
+			  <option value="Room Air">Room Air</option>
+			  <option value="Cannula">Cannula</option>
+			  <option value="BVM">BVM</option>
+			  <option value="Face Mask">Face Mask</option>
+			</select>
+		</div>
+
+		<div class="col-xs-10 vital-container">
+	    	<div class="vital-title">3. Pulse
+	    	</div>
+			<select class="btn btn-default dropdown-toggle" id="Pulse-q" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 105px;" value="110">
+			  <option value="Steady">Steady</option>
+			  <option value="Irregular">Irregular</option>
+			  <option value="Bouncing">Bouncing</option>
+			  <option value="No pulse">No pulse</option>
+			</select>
+			
+			<div class="systolic-field">
+				<form class="form-inline" role="form">
+		          <div class="form-group">
+		            <input type="text" class="form-control" id="Pulse" style="margin-left: 5px; width: 50px;height: 50px" value="70">
+		          </div>
+		          <label for="First name" style="margin-bottom: 0px; margin-right: 20px">BPM</label>
+	       	 	</form>
+			</div>
+			<select class="btn btn-default dropdown-toggle" id="Pulse-s" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 105px; text-align: center">
+			  <option value="Strong">Strong</option>
+			  <option value="Weak">Weak</option>
+			  <option value="No pulse">No pulse</option>
+			</select>
+		</div>
+		<div class="col-xs-10 vital-container">
+	    	<div class="vital-title">4. Pupils</div>
+	    	<div class="pupil-l-text">L</div>
+	    	<div class="pupil-checkbox" data-size="large">
+	    		<label>
+	    			<input type="checkbox" id="PupilsL" checked>
+	    		</label>
+	    	</div>
+	    	<div class="pupil-r-text">R</div>
+	    	<div class="pupil-checkbox" data-size="large" style="margin-right: 35px">
+	    		<label>
+	    			<input type="checkbox" id="PupilsR" checked>
+	    		</label>
+	    	</div>
+	    	<select class="btn btn-default dropdown-toggle" id="Pupils-E" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 105px; text-align: center; margin-left:20px">
+			  <option value="Equal">Equal</option>
+			  <option value="Unequl">Unequal</option>
+			  <option value="None">None</option>
+			</select>
+		</div>
+		<div class="col-xs-10 vital-container">
+	    	<div class="vital-title">5. Skin
+	    	</div>
+			<select class="btn btn-default dropdown-toggle" id="Skin" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 162px;">
+			  <option value="Normal">Normal</option>
+			  <option value="Diaphoretic">Diaphoretic</option>
+			  <option value="Dry">Dry</option>
+			  <option value="Pale" selected="selected">Pale</option>
+			</select>
+			<select class="btn btn-default dropdown-toggle" id="Temperature" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" role="button" style="height: 50px; width: 162px;">
+			  <option value="Normal">Normal</option>
+			  <option value="Cold">Cold</option>
+			  <option value="Clammy">Clammy</option>
+			  <option value="Warm">Warm</option>
+			  <option value="Febrile" selected="selected">Febrile</option>
+			</select>
+		</div>
+		<div class="col-xs-10 vital-container">
+	    	<div class="vital-title">6. SpO2
+	    	</div>
+	    	<div class="systolic-field">
+				<form class="form-inline" role="form">
+		          <div class="form-group">
+		            <input type="text" class="form-control" id="SpO2" style=" width: 100px;height: 50px" value="94">
+		          </div>
+		          <label for="First name" style="margin-bottom: 0px">% Saturation</label>
+	       	 	</form>
+			</div>
+		</div>
+		<div class="col-xs-10 vital-container">
+	    	<div class="vital-title">7. BP
+	    	</div>
+			<div class="systolic-field">
+				<form class="form-inline" role="form">
+		          <div class="form-group">
+		            <label for="First name" style="margin-bottom: 0px">Sys/Dias </label>
+		            <input type="text" class="form-control" id="BPSys" style="margin-left: 5px; width: 100px;height: 50px" value="110">
+		          </div>
+		          <div class="form-group">
+		            <label for="Last name">/</label>
+		            <input type="text" class="form-control" id="BPDia" style="width: 100px;margin-left: 0px;height: 50px" value="70">
+		          </div>
+	        </form>
+		</div>
+	</div>
+
+
+    </div>
+	<hr>
+
+	<div id="section3" class="something">
+		<div class="col-xs-10 sec 3">
+			<div class="page-header">
+	   			<h2>Primary Assessment</h2>
+	   			<p class="lead">Insert Primary Data</p>
+	 		</div>
+
+			<div class="col-xs-10 vital-container">
+				<div class="vital-title">1. Symptom</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Symptom" style="margin-left: 5px; width: 200px;height: 50px" value="asthma attack">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+
+			<div class="col-xs-10 vital-container">
+	   			<div class="vital-title">2. Location</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Location" style="margin-left: 5px; width: 200px;height: 50px">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+			<div class="col-xs-10 vital-container">
+				<div class="vital-title">3. Pain Level</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="PainLevel" style="margin-left: 5px; width: 200px;height: 50px">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+			<div class="col-xs-10 vital-container">
+				<div class="vital-title">4. Description</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Description" style="margin-left: 5px; width: 200px;height: 50px">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+			<div class="col-xs-10 vital-container">
+				<div class="vital-title">5. Duration</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Duration" style="margin-left: 5px; width: 200px;height: 50px">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+			<div class="col-xs-10 vital-container">
+				<div class="vital-title">6. Frequency</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Frequency" style="margin-left: 5px; width: 200px;height: 50px">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+			<div class="col-xs-10 vital-container">
+				<div class="vital-title">7. Radiating</div>
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Radiating" style="margin-left: 5px; width: 200px;height: 50px">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+			<div class="col-xs-10 vital-container">
+				<button type="button" class="btn btn-primary">Add More</button>
+			</div>
+
+		</div>
+    </div>
+
+    <hr>
+	<div id="section4" class="something">
+		<div class="col-xs-10 sec 4">
+			<div class="page-header">
+	   			<h2>Treatments</h2>
+	   			<p class="lead">Enter treatments given</p>
+	 		</div>
+	 	</div>
+	 </div>
+
+	<hr>
+	<div id="section5" class="something">
+		<div class="col-xs-10 sec 5">
+			<div class="page-header">
+	   			<h2>Miscellaneous</h2>
+	   			<p class="lead">Enter other notes</p>
+	 		</div>
+	 	</div>
+
+	 	<div class="col-xs-10 vital-container">
+				<div class="systolic-field">
+					<form class="form-inline" role="form">
+	         			<div class="form-group">
+	           				<input type="text" class="form-control" id="Notes" style="margin-left: 5px; width: 500px;height: 500px" value="History of asthma, inhalor perscribed.|Albuterol administered 2 times 15:05 15:10|Warfarin|throat tight|breathing issues">
+	         			</div>
+      	 			</form>
+				</div>
+			</div>
+
+	 </div>
+
+	 <button id="submit" type="submit" class="btn btn-default">Submit</button>
+
+
+</div>
+</div>
+</div>
+</div>
+	
+
+
+
+	
+
+
+<!--   	<div class="row1"> 
+	  	<div class="col-xs-2">
+		  	 <div class="resp-title pull-left" style="font-size: 36px;"><strong>Respiratory</strong></div>
+		  	 RPM
+		  	 </div>
+  	 	</div>
+  	 	<div class="col-xs-8">
+  	 		<form role="form">
+	   		<div class="form-group pull-left">
+	     			<input type="text" class="form-control" id="usr">
+	   		</div>
+ 			</form>
+  	 	</div>
+  	 </div>-->
+</div> <!--- /.container -->
+
+   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+   <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 	<script>
+ 		console.log("HELLO");
+		var defaults = {}
+		 , one_second = 1000
+		 , one_minute = one_second * 60
+		 , one_hour = one_minute * 60
+		 , one_day = one_hour * 24
+		 , startDate = new Date()
+		 , face = document.getElementById('lazy');
+
+		// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+		var requestAnimationFrame = (function() {
+		 return window.requestAnimationFrame       || 
+		        window.webkitRequestAnimationFrame || 
+		        window.mozRequestAnimationFrame    || 
+		        window.oRequestAnimationFrame      || 
+		        window.msRequestAnimationFrame     || 
+		        function( callback ){
+		          window.setTimeout(callback, 1000 / 60);
+		        };
+		}());
+
+		tick();
+
+		function tick() {
+
+		 var now = new Date()
+		   , elapsed = now - startDate
+		   , parts = [];
+
+		 parts[0] = '' + Math.floor( elapsed / one_hour );
+		 parts[1] = '' + Math.floor( (elapsed % one_hour) / one_minute );
+		 parts[2] = '' + Math.floor( ( (elapsed % one_hour) % one_minute ) / one_second );
+
+		 parts[0] = (parts[0].length == 1) ? '0' + parts[0] : parts[0];
+		 parts[1] = (parts[1].length == 1) ? '0' + parts[1] : parts[1];
+		 parts[2] = (parts[2].length == 1) ? '0' + parts[2] : parts[2];
+
+		 face.innerText = parts.join(':');
+		 
+		 requestAnimationFrame(tick);
+		 
+		}
+	</script>
+
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+ </body>
+</html>
+

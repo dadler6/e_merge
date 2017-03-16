@@ -1,0 +1,13 @@
+FirstName: April
+LastName: Lo
+Sex: Female
+Age: 20
+Weight: 100
+HeightFt: 5
+HeightIn: 6
+Symptom: cardiac irregularities
+Note: radiating pain to left shoulder
+Note: chest hurts
+BPDia: 30
+BPSys: 140
+Pulse: 140
